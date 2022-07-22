@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+#Script to open twitch vods from terminal.
+#
+#
+#
+notify-send "Opening vod"
+query=$(printf '%s' "$*" | tr ' ' '+' )
+
+if [[ -n "$query" ]]
+then
+	streamer=$query
+else
+	echo "Input twitch vod link"
+	read streamer
+fi
+
+# Opens Twitch VOD using streamling and mpv.
+streamlink $streamer best -p "mpv --profile='stream' --script-opts='enable-stream-cache-reduction=true'" --title="stream-twitch" --twitch-low-latency --twitch-disable-ads  --ringbuffer-size=256M --record="/tmp/stream-twitch.mp4" --force

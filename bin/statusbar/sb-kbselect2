@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+#
+kb="$(setxkbmap -query | grep -op 'layout:\s*\k\w+')" || exit 1
+
+case $BLOCK_BUTTON in
+	1) setxkbmap "is";;
+	2) notify-send "Layout =" "$(setxkbmap -query | grep -op 'layout:\s*\k\w+')";;
+	3) setxkbmap "us"
+	notify-send "Set layout to US";;
+esac
+
+echo "$kb"

@@ -1,0 +1,1 @@
+../src/dwm-bar/dwm_bar.sh

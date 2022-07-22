@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+#Script to open twitch stream from terminal.
+#
+#
+#
+notify-send "Opening Stream"
+query=$(printf '%s' "$*" | tr ' ' '+' )
+
+if [[ -n "$query" ]]
+then
+	streamer=$query
+else
+	echo "what streamer"
+	read streamer
+fi
+
+# Opens uses streamlink to twitch with mpv.
+# Uses best settings and has very low latency.
+streamlink https://www.twitch.tv/$streamer \ best -p "mpv --profile='stream' --script-opts='enable-stream-cache-reduction=true'" --title="stream-twitch" --twitch-low-latency --twitch-disable-ads --ringbuffer-size=256M

@@ -1,0 +1,3 @@
+#!/bin/sh
+notify-send "Opening Stream"
+streamlink https://www.twitch.tv/quin69 \ best -p "mpv --profile='stream': --script-opts='enable-stream-cache-reduction=true'" --title="stream-twitch" --twitch-low-latency --twitch-disable-ads --ringbuffer-size=256M
