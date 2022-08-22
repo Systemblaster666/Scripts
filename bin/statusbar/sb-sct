@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# SCT bluelight filter.
+# https://flak.tedunangst.com/post/sct-set-color-temperature
+#
+#
+currentsct=$(xsct | grep -oE '[0-9]{4}')
+increase=$(( currentsct + 500 ))
+decrease=$(( currentsct - 500 ))
+
+case $BLOCK_BUTTON in
+	1) xsct 1500 && notify-send "$currentsct" ;;
+	4) if [ "$currentsct" -le 6500 ]; then
+		xsct $increase
+	else
+		xsct 1000
+	fi;;
+	5)if [ "$currentsct" -gt 1000 ]; then
+		xsct $decrease
+	else
+		xsct 6500
+	fi;;
+
+	3) xsct 6500 && notify-send "$currentsct" ;;
+esac
+
+echo "🔆$currentsct"
