@@ -1,13 +1,31 @@
 #!/bin/sh
 #
 #
-kb="$(setxkbmap -query | grep -op 'layout:\s*\k\w+')" || exit 1
+kb="$(setxkbmap -query | grep -oP 'layout:\s*\K\w+')" || exit 1
 
 case $BLOCK_BUTTON in
-	1) setxkbmap "is";;
-	2) notify-send "Layout =" "$(setxkbmap -query | grep -op 'layout:\s*\k\w+')";;
-	3) setxkbmap "us"
-	notify-send "Set layout to US";;
+	1)
+	#notify-send "current language is:" "$kb"
+	if [ "$kb" == "us" ]; then
+		setxkbmap "is"
+		remaps
+		echo "$kb"
+		pkill -RTMIN+30 "${STATUSBAR:-dwmblocks}"
+	else
+		setxkbmap "us"
+		remaps
+		echo "$kb"
+		pkill -RTMIN+30 "${STATUSBAR:-dwmblocks}"
+	fi;;
+
+
+#	1) setxkbmap "is"
+#	   kb="$(setxkbmap -query | grep -oP 'layout:\s*\K\w+')" || exit 1;;
+	#2) notify-send "Layout =" "$(setxkbmap -query | grep -oP 'layout:\s*\K\w+')";;
+#	3) setxkbmap "us"
+#	   kb="$(setxkbmap -query | grep -oP 'layout:\s*\K\w+')" || exit 1
+#	   notify-send "Set layout to US";;
 esac
 
 echo "$kb"
+#echo "$(setxkbmap -query | grep -oP 'layout:\s*\K\w+')"

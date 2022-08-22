@@ -16,4 +16,5 @@ else
 fi
 
 # Opens Twitch VOD using streamling and mpv.
-streamlink $streamer best -p "mpv --profile='stream' --script-opts='enable-stream-cache-reduction=true'" --title="stream-twitch" --twitch-low-latency --twitch-disable-ads  --ringbuffer-size=256M --record="/tmp/stream-twitch.mp4" --force
+mpv $streamer best --profile='stream' --script-opts='enable-stream-cache-reduction=true'
+#streamlink $streamer best -p "mpv --profile='stream' --script-opts='enable-stream-cache-reduction=true'" --title="stream-twitch" --twitch-low-latency --twitch-disable-ads  --ringbuffer-size=256M --record="/tmp/stream-twitch.mp4" --force
