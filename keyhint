@@ -1,0 +1,3 @@
+#!/bin/sh
+hyprctl switchxkblayout "wooting-wooting-60he-(arm)" next
+notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/audio-headphones.svg" "Headset" 
